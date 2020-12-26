@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    ICT HUB INVOICE - All Invoices
+{% endblock title %}
+
+
+{% block content %}
+        <!-- As a link -->
+<nav class="navbar navbar-light bg-light">
+      <a href="{% url 'all_invoice' %}" class="navbar-brand mr-auto mt-2">ICT HUB INVOICE</a>
+      <a class="nav-link ml-0" href="{% url 'customer-company' %}">Add Company Info</a>
+      <a class="nav-link ml-0" href="{% url 'invoice' %}">Create Invoice</a>
+      <a class="nav-link ml-0" href="{% url 'logout' %}">Logout</a>
+      <form class="form-inline my-2 my-lg-0" method="GET">
+      {% csrf_token %}
+      <input class="form-control mr-sm-2" type="number" name="index_search" placeholder="Place Invoice Number" aria-label="Search" value="{{ request.GET.index_search }}">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      </form>
+</nav>
+
+ <div class="container-fluid">
+        <div class="row">
+        <div class="col-md-12 mt-5">
+          <table class="table table-striped">
+            <thead>
+                <tr>
+                    <td class="text-center">Company Name</td>
+                    <td class="text-center">Invoice Number</td>
+                    <td class="text-center">Total amount</td>
+                    <td class="text-center">Paid</td>
+                    <td class="text-center">Due amount</td>
+                    <td class="text-center">Due date</td>
+                    <td class="text-center">Action</td>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in inv %}
+
+                <tr>
+                    <td class="text-center" style="vertical-align: middle;!important">{{ i.company_id.name }}</td>
+                    <td class="text-center" style="color:indianred;vertical-align: middle;!important">{{ i.invoice_number }}</td>
+                    <td class="text-center" style="vertical-align: middle;!important">{{ i.total|add:i.tax }}</td>
+                    <td class="text-center" style="vertical-align: middle;!important">{{ i.paid }}</td>
+                    <td class="text-center" style="vertical-align: middle;!important">{{ i.grand_total|floatformat:2 }}</td>
+                    <td class="text-center" style="vertical-align: middle;!important">{{ i.due_date|date:"M d, Y" }}</td>
+                    <td class="text-center">
+                    <a href="{% url 'edit-invoice' id=i.id %}" class="btn btn-sm btn-primary" style="margin-right:5px;">Edit</a>
+                    <a href="{% url 'view-invoice' id=i.id %}" class="btn btn-sm btn-info" style="margin-right:5px;">View</a>
+                    <a href="{% url 'delete-invoice' id=i.id %}" class="btn btn-sm btn-danger" >Delete</a>
+                    </td>
+                </tr>
+
+                {% endfor %}
+            </tbody>
+        </table>
+        </div>
+    </div>
+
+    </div>
+
+
+
+
+{% endblock content %}

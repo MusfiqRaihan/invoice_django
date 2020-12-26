@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load crispy_forms_filters %}
+
+{% block title %}
+    ICT HUB INVOICE - CREATE AN INVOICE
+{% endblock title %}
+
+
+
+
+{% block content %}
+    <!-- As a link -->
+<nav class="navbar navbar-light bg-light">
+      <a href="{% url 'all_invoice' %}" class="navbar-brand mr-auto mt-2">ICT HUB INVOICE</a>
+      <a class="nav-link ml-0" href="{% url 'customer-company' %}">Add Company Info</a>
+      <a class="nav-link ml-0" href="{% url 'all_invoice' %}">All Invoices</a>
+      <a class="nav-link ml-0" href="{% url 'logout' %}">Logout</a>
+</nav>
+
+
+
+<div class="container my-5">
+    <div class="row">
+        <div class="col-md-6 offset-3">
+              <h1 class="text-center">Generate Invoice</h1>
+                 {% if messages %}
+                    <div class="messages">
+                        {% for message in messages %}
+                        <div {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</div>
+                        {% endfor %}
+                    </div>
+                 {% endif %}
+
+
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form|crispy }}
+                    <div class="text-center">
+                        <a href="{% url 'customer-company' %}" class="btn btn-info" style="font-size: 15px;margin-right: 10px;">Add Company Info</a>
+                        <button class="btn btn-success" style="font-size: 15px;">Submit</button>
+                    </div>
+                </form>
+
+        </div>
+    </div>
+</div>
+
+
+{% endblock content %}

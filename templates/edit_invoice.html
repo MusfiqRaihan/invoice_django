@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% load crispy_forms_filters %}
+{% load django_template_maths %}
+
+{% block title %}
+    ICT HUB INVOICE - CREATE AN INVOICE
+{% endblock title %}
+
+
+
+
+{% block content %}
+    <!-- As a link -->
+<nav class="navbar navbar-light bg-light">
+      <a href="{% url 'all_invoice' %}" class="navbar-brand mr-auto mt-2">ICT HUB INVOICE</a>
+      <a class="nav-link ml-0" href="{% url 'customer-company' %}">Add Company Info</a>
+      <a class="nav-link ml-0" href="{% url 'all_invoice' %}">All Invoices</a>
+      <a class="nav-link ml-0" href="{% url 'logout' %}">Logout</a>
+</nav>
+
+
+
+<div class="container my-5">
+    <div class="row">
+
+
+        <div class="col-md-8 offset-2 mt-1">
+        
+
+            <table class="table table-striped">
+            <thead>
+                <tr>
+                    <td style="">Item name</td>
+                    <td style="">Quantity</td>
+                    <td style="">Unit Price</td>
+                    <td style="">Sub Total</td>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in items %}
+                <tr>
+
+                    <td style="vertical-align: middle;!important">{{ item.item_name }}</td>
+                    <td style="vertical-align: middle;!important">{{ item.quantity }}</td>
+                    <td style="vertical-align: middle;!important">{{ item.unit_price }}</td>
+                    <td style="vertical-align: middle;!important">{{ item.sub_total }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <div class="well">
+            <h4 class="text-center">Total: {{ total }}</h4>
+        </div>
+
+
+
+                <div class="col-md-8 offset-2 mt-5">
+                    <form method="post">
+                    {% csrf_token %}
+                    {{ form2|crispy }}
+                    <div class="text-center">
+                        <button class="btn btn-info" style="font-size: 15px;margin-right: 10px;">Add Payment</button>
+                        <p style="margin-top:10px;font-size:18px;"><b>Paid:</b> {{ inv.paid }} <b>Due:</b> {{ inv.grand_total|floatformat:2 }}</p>
+                    </div>
+                    </form>
+                </div>
+
+        </div>
+
+
+
+    </div>
+</div>
+
+
+{% endblock content %}
