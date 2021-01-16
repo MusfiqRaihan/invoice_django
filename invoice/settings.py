@@ -16,11 +16,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = '!ut1fw3b=e@p1li=+s-4insb^r4e*hkif(3mz)7_irq7j*8hd('
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'icthubinvoice.herokuapp.com']
+# ALLOWED_HOSTS = ['127.0.0.1', 'icthubinvoice.herokuapp.com']
 
-
+ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
@@ -35,6 +35,8 @@ INSTALLED_APPS = [
     'customer',
     'crispy_forms',
     'django_template_maths',
+    'rest_framework',
+    'rest_framework.authtoken',
 ]
 
 MIDDLEWARE = [
@@ -136,3 +138,13 @@ MESSAGE_TAGS = {
     messages.DEBUG: 'alert alert-info',
 
 }
+
+
+# REST_FRAMEWORK = {
+#     'DEFAULT_AUTHENTICATION_CLASSES':
+#         ['rest_framework.'
+#          'authentication.BasicAuthentication'],
+#     'DEFAULT_PERMISSION_CLASSES':
+#         ['rest_framework.'
+#          'permissions.IsAuthenticated']
+# }
