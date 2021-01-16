@@ -18,9 +18,9 @@ SECRET_KEY = '!ut1fw3b=e@p1li=+s-4insb^r4e*hkif(3mz)7_irq7j*8hd('
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-# ALLOWED_HOSTS = ['127.0.0.1', 'icthubinvoice.herokuapp.com']
+ALLOWED_HOSTS = ['127.0.0.1', 'icthubinvoice.herokuapp.com']
 
-ALLOWED_HOSTS = []
+
 # Application definition
 
 INSTALLED_APPS = [
